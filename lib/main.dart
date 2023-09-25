@@ -1,5 +1,10 @@
+// ignore_for_file: no_logic_in_create_state
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:project_todo/Finished.dart';
+import 'package:project_todo/home.dart';
+import 'package:project_todo/new.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,120 +18,92 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
+  int _selectedIndex = 0;
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      log(_selectedIndex.toString());
+    });
+  }
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    New(),
+    Finished(),
+  ];
+
   Widget build(BuildContext context) {
     return MaterialApp(
-       theme: ThemeData(
-         primarySwatch: Colors.green,
-         canvasColor: const Color.fromRGBO(255, 254, 229,1),
-       ),
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        canvasColor: const Color.fromRGBO(255, 254, 229, 1),
+      ),
       home: Scaffold(
-        appBar:AppBar(
+        appBar: AppBar(
           backgroundColor: Colors.purple,
-          leading: const IconButton(
-            icon: Icon(Icons.format_list_bulleted_rounded,color: Colors.white,),
-            onPressed: null,
-          ),
-          title:const Text('Todo List',style: TextStyle(
-              fontSize: 20,
-              fontStyle: FontStyle.normal
-          ),),
-
-          bottom:PreferredSize(
-            preferredSize:Size(0, 80),
-            child:Container(
+          bottom: PreferredSize(
+            preferredSize: Size(0, 10),
+            child: Container(
               //color: Colors.white,
               child: Center(
                 child: Container(
                   width: 300,
-                  margin: const EdgeInsets.only(bottom:10),
-                  decoration:BoxDecoration(
-                      border: Border.all(color: Colors.white,width: 2),
-                      borderRadius: BorderRadius.circular(30)
-                  ),
-
+                  margin: const EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 2),
+                      borderRadius: BorderRadius.circular(30)),
                   child: const TextField(
                     onChanged: null,
                     style: TextStyle(color: Colors.white),
                     cursorColor: Colors.white,
                     textAlign: TextAlign.start,
-
-                    decoration:InputDecoration(
-                        hintText: 'search todo',
+                    decoration: InputDecoration(
+                        hintText: 'Search',
                         hintStyle: TextStyle(color: Colors.white),
                         border: InputBorder.none,
                         prefixIcon: IconButton(
                           onPressed: null,
-                          icon: Icon(Icons.search_rounded,color: Colors.white,),
-                        )
-
-                    ),
+                          icon: Icon(
+                            Icons.search_rounded,
+                            color: Colors.white,
+                          ),
+                        )),
                   ),
                 ),
               ),
             ),
           ),
-          actions:  [
-            Container(
-              margin:EdgeInsets.only(top: 20,right: 10),
-              child: const Column(
-                children: [
-                  Text("avishka brpayh",
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.white
-                    ),
-                  )
-                ],
+        ),
+        body: _widgetOptions.elementAt(_selectedIndex), //body widget
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.purple,
+          height: 70,
+          index: _selectedIndex,
+          onTap: _onItemTapped,
+          items: const [
+            Icon(
+              Icons.home_filled,
+              size: 25,
+              color: Colors.black,
+            ),
+            FloatingActionButton(
+              backgroundColor: Colors.white,
+              hoverColor: Colors.purple,
+              onPressed: null,
+              child: Icon(
+                Icons.add,
+                size: 25,
+                color: Colors.black,
               ),
             ),
-
-            Container(
-              margin: EdgeInsets.only(right: 30,top: 10),
-              width: 40,
-              height: 40,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage('assets/image/CAMBO_SE.png'),
-                      fit: BoxFit.fill
-                  )
-              ),
+            Icon(
+              Icons.contact_page_rounded,
+              size: 25,
+              color: Colors.black,
             )
           ],
-
         ),
-        body: null,//body widget
-        bottomNavigationBar: CurvedNavigationBar(
-              backgroundColor: Colors.purple,
-              //color: Colors.white10,
-              height: 70,
-              onTap: (index){
-                print(index);
-              },
-              items:  const [
-                Icon(Icons.home_filled,
-                  size: 25,
-                  color: Colors.black,
-                ),
-                FloatingActionButton(
-                  backgroundColor: Colors.white,
-                  hoverColor: Colors.purple,
-                  onPressed: null,
-                  child: Icon(Icons.add,
-                    size: 25,
-                    color: Colors.black,
-                  ),
-                ),
-                Icon(Icons.contact_page_rounded,
-                  size: 25,
-                  color: Colors.black,
-                )
-              ],
-            ),
-        ),
-
+      ),
     );
   }
 }
-
