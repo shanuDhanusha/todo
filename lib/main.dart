@@ -39,7 +39,8 @@ class _MyAppState extends State<MyApp> {
         canvasColor: const Color.fromRGBO(255, 254, 229, 1),
       ),
       home: Scaffold(
-        appBar: AppBar(
+        appBar: _selectedIndex!=1
+            ? AppBar(
           backgroundColor: Colors.purple,
           bottom: PreferredSize(
             preferredSize: Size(0, 10),
@@ -72,6 +73,19 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
+          ),
+        ):AppBar(
+          backgroundColor: Colors.purple,
+          title: const Text('Add your Todo',
+               style: TextStyle(
+                 fontSize: 18,
+                 color: Colors.white
+               ),
+          ),
+          leading: const Icon(
+            Icons.edit_note_sharp,
+            size: 40,
+            color: Colors.white,
           ),
         ),
         body: _widgetOptions.elementAt(_selectedIndex), //body widget

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './componets/UserInput.dart';
 
 class New extends StatefulWidget {
   const New({super.key});
@@ -9,14 +10,30 @@ class New extends StatefulWidget {
 }
 
 class _New extends State<New> {
+
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Add new',
-      style: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-      ),
-    );
+    Size screenSize = MediaQuery.of(context).size;
+    double width=screenSize.width;
+    double height=screenSize.height;
+    return  Container(
+        width: width,
+        height: height-70,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+         // color: Colors.white,
+        ),
+          child:  Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+                UserInput(width),
+                UserInput(width),
+
+
+
+            ],
+          ),
+      );
+
   }
 }
