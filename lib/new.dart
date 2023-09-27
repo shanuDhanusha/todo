@@ -16,24 +16,7 @@ class _New extends State<New> {
     Size screenSize = MediaQuery.of(context).size;
     double width=screenSize.width;
     double height=screenSize.height;
-    return  Container(
-        width: width,
-        height: height-70,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-         // color: Colors.white,
-        ),
-          child:  Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-                UserInput(width),
-                UserInput(width),
-
-
-
-            ],
-          ),
-      );
+    return  UserInput(width,height);
 
   }
 }

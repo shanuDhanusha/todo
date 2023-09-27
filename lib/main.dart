@@ -92,6 +92,7 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.purple,
           height: 70,
+          animationDuration: Duration(milliseconds: 1000),
           index: _selectedIndex,
           onTap: _onItemTapped,
           items: const [
