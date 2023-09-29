@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 
 class Compled extends StatefulWidget {
   final String title;
-  final String exDate;
+  final DateTime exDate;
   final String discription;
   final Color color;
    Compled({
@@ -59,7 +60,7 @@ class _CompledState extends State<Compled> {
                     ),
                     Container(
                        margin: const EdgeInsets.only(top: 10),
-                      child:  Text('${widget.exDate}',
+                      child:  Text(DateFormat.yMMMd().format(widget.exDate).toString(),
                         style: const TextStyle(
                             fontSize: 12,
                             color: Colors.purple,

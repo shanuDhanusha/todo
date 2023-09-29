@@ -2,9 +2,10 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:project_todo/Finished.dart';
-import 'package:project_todo/home.dart';
-import 'package:project_todo/new.dart';
+import './Finished.dart';
+import './home.dart';
+import './new.dart';
+import './componets/UserInput.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,11 +26,18 @@ class _MyAppState extends State<MyApp> {
       log(_selectedIndex.toString());
     });
   }
+  void navigateHome(){
+      setState(() {
+         _selectedIndex=0;
+      });
+  }
 
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
     New(),
     Finished(),
+
+
   ];
 
   Widget build(BuildContext context) {
@@ -118,7 +126,11 @@ class _MyAppState extends State<MyApp> {
             )
           ],
         ),
+
       ),
+      routes: {
+        '/homePage': (context) =>const Home(),
+      },
     );
   }
 }

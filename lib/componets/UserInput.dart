@@ -9,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 class UserInput extends StatefulWidget {
   double Width;
   double heigh;
+  //Function func;
    UserInput(this.Width,this.heigh);
 
   @override
@@ -320,12 +321,19 @@ class _UserInputState extends State<UserInput> {
          DATA_TODOS.add(
              Todos(
              title: title,
-             exDate:_selectedDate.toString(),
+             exDate:_selectedDate,
              discription: discriptTodo,
-             color:Colors.black
+             startTime: _selectedStartTime,
+             endTime: _selectedEndTime,
+             notificationTime: reminderTime,
+             notificationNote: noteReminder,
+               color: _valueBlack
+                   ? Colors.black
+                   : (_valueAmban ? Colors.amberAccent : Colors.green),
          ));
 
-        // Navigator.of(context).pushNamed();
+         showToast(context,"Successfully ");
+
       });
 
 
