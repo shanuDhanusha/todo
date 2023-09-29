@@ -6,11 +6,15 @@ class Compled extends StatefulWidget {
   final String title;
   final DateTime exDate;
   final String discription;
+  final TimeOfDay startTime;
+  final TimeOfDay endTime;
   final Color color;
    Compled({
      required this.title,
      required this.exDate,
      required this.discription,
+     required this.startTime,
+     required this.endTime,
      required this.color}) ;
 
   @override
@@ -18,6 +22,35 @@ class Compled extends StatefulWidget {
 }
 
 class _CompledState extends State<Compled> {
+
+  String diurationTime(){
+    TimeOfDay startTime = widget.startTime;
+    TimeOfDay endTime = widget.endTime;
+
+    int startMinutes = startTime.hour * 60 + startTime.minute;
+    int endMinutes = endTime.hour * 60 + endTime.minute;
+
+    int durationInMinutes = endMinutes - startMinutes;
+
+    int hours = durationInMinutes ~/ 60;
+    int minutes = durationInMinutes % 60;
+    TimeOfDay duration = TimeOfDay(hour: hours, minute: minutes);
+
+    return "Day:${duration.hour ~/60}/hour:${duration.hour%60}/mit:${duration.minute}";
+
+  }
+
+  String convertTimeOfDayToString(TimeOfDay time) {
+    final now = DateTime.now();
+    final dateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      time.hour,
+      time.minute,
+    );
+    return DateFormat('hh:mm a').format(dateTime);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +73,7 @@ class _CompledState extends State<Compled> {
                 child: Text('${widget.title}',
                   style:
                   const TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   color: Colors.black,
                   fontWeight:FontWeight.bold
                 ),)
@@ -50,17 +83,29 @@ class _CompledState extends State<Compled> {
               child:  Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                       Text('${widget.discription}',
+                       Text('Start:${convertTimeOfDayToString(widget.startTime)} End:${convertTimeOfDayToString(widget.endTime)}',
                          style: const TextStyle(
-                       fontStyle:FontStyle.normal,
-                      fontSize: 15,
-                      color: Colors.purple
-                    ),
-                    softWrap: true,
+                           fontStyle:FontStyle.normal,
+                            fontSize: 12,
+                             color: Colors.purple,
+                             fontWeight: FontWeight.w800
+                         ),
+                           softWrap: true,
                     ),
                     Container(
-                       margin: const EdgeInsets.only(top: 10),
+                       margin: const EdgeInsets.only(top:5),
                       child:  Text(DateFormat.yMMMd().format(widget.exDate).toString(),
+                        style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.purple,
+                            fontWeight: FontWeight.w800
+                        ),
+                      ),
+                    ),
+
+                    Container(
+                      margin: const EdgeInsets.only(top:5),
+                      child:  Text("${diurationTime()}",
                         style: const TextStyle(
                             fontSize: 12,
                             color: Colors.purple,

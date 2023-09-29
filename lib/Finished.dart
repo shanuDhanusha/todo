@@ -44,8 +44,11 @@ class _Finished extends State<Finished> {
                   title:DATA_TODOS[index].title,
                   exDate:DATA_TODOS[index].exDate,
                   discription:DATA_TODOS[index].discription,
-                  color:DATA_TODOS[index].color
-              )
+                  startTime: DATA_TODOS[index].startTime,
+                  endTime: DATA_TODOS[index].endTime,
+                  color:DATA_TODOS[index].color,
+
+                )
 
               );
 

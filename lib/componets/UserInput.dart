@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../model/Todos.dart';
@@ -34,7 +35,7 @@ class _UserInputState extends State<UserInput> {
     String reminderTime="time";
     bool _valueBlack=false;
     bool _valueGreen=false;
-    bool  _valueAmban=false;
+    bool _valueAmban=false;
 
 
   //select date ......................................................
@@ -164,7 +165,7 @@ class _UserInputState extends State<UserInput> {
                     setState(() {
                        _valueAmban=false;
                        _valueGreen=false;
-                      _valueBlack = !_valueBlack;
+                      _valueBlack = true;
                     });
                   },
 
@@ -190,9 +191,9 @@ class _UserInputState extends State<UserInput> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                       _valueAmban=false;
                        _valueBlack=false;
-                      _valueGreen = !_valueGreen;
+                       _valueGreen=false;
+                       _valueAmban=true;
                     });
                   },
                   child: Container(
@@ -200,7 +201,7 @@ class _UserInputState extends State<UserInput> {
                     decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.amberAccent),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: _valueGreen
+                      child: _valueAmban
                           ? const Icon(
                         Icons.check,
                         size: 30.0,
@@ -218,8 +219,8 @@ class _UserInputState extends State<UserInput> {
                   onTap: () {
                     setState(() {
                       _valueBlack=false;
-                      _valueGreen=false;
-                      _valueAmban= !_valueAmban;
+                      _valueAmban=false;
+                      _valueGreen=true;
                     });
                   },
                   child: Container(
@@ -227,7 +228,7 @@ class _UserInputState extends State<UserInput> {
                     decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.green),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: _valueAmban
+                      child: _valueGreen
                           ? const Icon(
                         Icons.check,
                         size: 30.0,
@@ -320,16 +321,18 @@ class _UserInputState extends State<UserInput> {
       setState(() {
          DATA_TODOS.add(
              Todos(
-             title: title,
-             exDate:_selectedDate,
-             discription: discriptTodo,
-             startTime: _selectedStartTime,
-             endTime: _selectedEndTime,
-             notificationTime: reminderTime,
-             notificationNote: noteReminder,
+                 title: title,
+                 exDate:_selectedDate,
+                 discription: discriptTodo,
+                 startTime: _selectedStartTime,
+                 endTime: _selectedEndTime,
+                 notificationTime: reminderTime,
+                 notificationNote: noteReminder,
                color: _valueBlack
                    ? Colors.black
-                   : (_valueAmban ? Colors.amberAccent : Colors.green),
+                   : (_valueAmban
+                   ? Colors.amberAccent
+                   : (_valueGreen ? Colors.green : Colors.black26)),
          ));
 
          showToast(context,"Successfully ");
