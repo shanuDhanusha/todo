@@ -122,45 +122,9 @@ class _CompledState extends State<Compled> {
                    child: Icon(Icons.offline_pin,size: 30,color: Colors.white,),
 
             ),
-            // trailing: Container(
-            //   width: 30,
-            //   height: 100,
-            //   decoration: BoxDecoration(
-            //     borderRadius: BorderRadius.circular(20),
-            //     color: Colors.purple,
-            //   ),
-            // ),
-
-
-          ),
-        ),
-      ),
-      // child: Container(
-      //      width: 350,
-      //      height: 150,
-      //    child:   const Row(
-      //      children: [
-      //        Padding(
-      //           padding:EdgeInsets.all(20),
-      //          child: Column(
-      //            crossAxisAlignment: CrossAxisAlignment.center,
-      //            children: [
-      //              Expanded(
-      //                child: CircleAvatar(
-      //                    backgroundColor: Colors.amberAccent,
-      //                   radius: 30,
-      //                      child: Icon(Icons.offline_pin,color: Colors.white)
-      //
-      //                ),
-      //              )
-      //            ],
-      //          ),
-      //        ),
-      //
-      //      ]
-      //   )
-      //
-      // )
+           )
+         )
+      )
     );
   }
 }

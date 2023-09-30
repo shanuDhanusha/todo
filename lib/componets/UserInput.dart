@@ -273,10 +273,14 @@ class _UserInputState extends State<UserInput> {
     scaffold.showSnackBar(
       SnackBar(
           backgroundColor: Colors.purple,
-             content:Text(
-              message,
-              style: const TextStyle(fontSize: 18.0,color: Colors.white),  // Adjust the font size as needed
+             content:Container(
+                margin: EdgeInsets.only(bottom:20 ),
+               child: Text(
+                message,
+                style: const TextStyle(fontSize: 18.0,color: Colors.white),
+                 softWrap: true,// Adjust the font size as needed
           ),
+             ),
           duration: const Duration(seconds: 3),  // Adjust the display duration as needed
           behavior: SnackBarBehavior.floating,
         ),
@@ -287,6 +291,10 @@ class _UserInputState extends State<UserInput> {
   void validateData(BuildContext context){
       if(title.isEmpty ||title==null){
         showToast(context,'Enter your Title');
+        return;
+      }
+      if(title.length>25){
+        showToast(context, "Title should be less  15 than character");
         return;
       }
       if(discriptTodo.isEmpty|| discriptTodo==null){
