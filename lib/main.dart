@@ -6,8 +6,11 @@ import './Finished.dart';
 import './home.dart';
 import './new.dart';
 import './componets/UserInput.dart';
+import './server/databaseHelpper.dart';
 
-void main() {
+void main()async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await databaseHelpper.getDB();
   runApp(const MyApp());
 }
 

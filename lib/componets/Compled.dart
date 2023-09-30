@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -23,8 +25,17 @@ class Compled extends StatefulWidget {
 
 class _CompledState extends State<Compled> {
 
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Timer.periodic(Duration(seconds: 1), (timer) {
+       diurationTime();
+    });
+  }
+
   String diurationTime(){
-    TimeOfDay startTime = widget.startTime;
+    TimeOfDay startTime = TimeOfDay.now();
     TimeOfDay endTime = widget.endTime;
 
     int startMinutes = startTime.hour * 60 + startTime.minute;
@@ -35,7 +46,6 @@ class _CompledState extends State<Compled> {
     int hours = durationInMinutes ~/ 60;
     int minutes = durationInMinutes % 60;
     TimeOfDay duration = TimeOfDay(hour: hours, minute: minutes);
-
     return "Day:${duration.hour ~/60}/hour:${duration.hour%60}/mit:${duration.minute}";
 
   }

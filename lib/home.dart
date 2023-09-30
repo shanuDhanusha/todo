@@ -5,6 +5,7 @@ import './model/DataArray.dart';
 import './model/Todos.dart';
 import './componets/Compled.dart';
 import './componets/UserInput.dart';
+import './server/databaseHelpper.dart';
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -15,19 +16,47 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
 
+  late List<Todos> todosList=[];
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize and retrieve data from the database
+    loadTodos();
+  }
+
+  Future<void> loadTodos() async {
+    // Replace 'YourDatabaseHelper()' with the appropriate instance of your database helper
+    todosList = (await databaseHelpper.getTodo())!;
+    setState(() {});
+  }
+
+  TimeOfDay parseTimeOfDayFromString(String timeString) {
+    // Extract the time part from the string, e.g., "00:15"
+    final timePart = timeString.substring(timeString.indexOf('(') + 1, timeString.indexOf(')'));
+
+    // Split the time part into hours and minutes
+    final timeParts = timePart.split(':');
+    final hours = int.parse(timeParts[0]);
+    final minutes = int.parse(timeParts[1]);
+
+    return TimeOfDay(hour: hours, minute: minutes);
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: DATA_TODOS.length,
+        itemCount: todosList.length,
         padding: EdgeInsets.all(20),
         itemBuilder:(context,index){
           return Dismissible(
-              key:ValueKey<String>(DATA_TODOS[index].title),
+              key:ValueKey<String>(todosList[index].id.toString()),
               onDismissed: (DismissDirection direction) {
                 setState(() {
-                  DATA_TODOS.removeAt(index);
+                  //DATA_TODOS.removeAt(index);
                 });
               },
               background: Container(
@@ -44,12 +73,12 @@ class _Home extends State<Home> {
                 // padding: EdgeInsets.all(20),
               ),
               child :Compled(
-                title:DATA_TODOS[index].title,
-                exDate:DATA_TODOS[index].exDate,
-                discription:DATA_TODOS[index].discription,
-                startTime: DATA_TODOS[index].startTime,
-                endTime: DATA_TODOS[index].endTime,
-                color:DATA_TODOS[index].color,
+                title:todosList[index].title,
+                exDate:DateTime.parse(todosList[index].exDate ) ,
+                discription:todosList[index].discription,
+                startTime:parseTimeOfDayFromString(todosList[index].startTime),
+                endTime:parseTimeOfDayFromString(todosList[index].endTime),
+                color:Color(todosList[index].color),
 
               )
 

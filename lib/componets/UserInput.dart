@@ -5,6 +5,7 @@ import '../model/Todos.dart';
 import '../model/DataArray.dart';
 import '../home.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../server/databaseHelpper.dart';
 
 
 class UserInput extends StatefulWidget {
@@ -25,6 +26,8 @@ class _UserInputState extends State<UserInput> {
   final GlobalKey<FormState> keyEndTime=GlobalKey<FormState>();
   final GlobalKey<FormState> keyRemainderTime=GlobalKey<FormState>();
   final GlobalKey<FormState> keyNote=GlobalKey<FormState>();
+
+   late Todos mytodo;
 
      String title='';
      String discriptTodo='';
@@ -327,27 +330,26 @@ class _UserInputState extends State<UserInput> {
       }
 
       setState(() {
-         DATA_TODOS.add(
-             Todos(
+
+            mytodo= Todos(
+                 id:0,
                  title: title,
-                 exDate:_selectedDate,
+                 exDate:_selectedDate.toString(),
                  discription: discriptTodo,
-                 startTime: _selectedStartTime,
-                 endTime: _selectedEndTime,
+                 startTime: _selectedStartTime.toString(),
+                 endTime: _selectedEndTime.toString(),
                  notificationTime: reminderTime,
                  notificationNote: noteReminder,
                color: _valueBlack
-                   ? Colors.black
+                   ? Colors.black.value
                    : (_valueAmban
-                   ? Colors.amberAccent
-                   : (_valueGreen ? Colors.green : Colors.black26)),
-         ));
-
-         showToast(context,"Successfully ");
+                   ? Colors.amberAccent.value
+                   : (_valueGreen ? Colors.green.value : Colors.black26.value)
+            ));
+             databaseHelpper.addTodo(mytodo);
+             showToast(context,"successfully");
 
       });
-
-
 
   }
 
