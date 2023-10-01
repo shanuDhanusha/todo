@@ -27,7 +27,7 @@ class _Home extends State<Home> {
 
   Future<void> loadTodos() async {
     // Replace 'YourDatabaseHelper()' with the appropriate instance of your database helper
-    todosList = (await databaseHelpper.getTodo())!;
+    //todosList = (await databaseHelpper.getTodo())!;
     setState(() {});
   }
 

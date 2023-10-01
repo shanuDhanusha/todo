@@ -173,7 +173,7 @@ class _UserInputState extends State<UserInput> {
                   },
 
                   child: Container(
-                    margin: EdgeInsets.only(left: 15),
+                    margin: EdgeInsets.only(left: 5),
                     decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -200,7 +200,7 @@ class _UserInputState extends State<UserInput> {
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.only(left: 15),
+                    margin: EdgeInsets.only(left: 5),
                     decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.amberAccent),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -227,7 +227,7 @@ class _UserInputState extends State<UserInput> {
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.only(left: 15),
+                    margin: EdgeInsets.only(left: 5),
                     decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.green),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -248,7 +248,7 @@ class _UserInputState extends State<UserInput> {
                 Container(
                   width: 150,
                   height: 50,
-                  margin: const EdgeInsets.only(left: 10,top:0),
+                  margin: const EdgeInsets.only(left:5,top:0),
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Colors.purple),
