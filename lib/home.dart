@@ -1,4 +1,5 @@
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import './model/DataArray.dart';
@@ -18,11 +19,13 @@ class _Home extends State<Home> {
 
   late List<Todos> todosList=[];
 
+
   @override
   void initState() {
     super.initState();
     // Initialize and retrieve data from the database
     loadTodos();
+
   }
 
   Future<void> loadTodos() async {
@@ -43,8 +46,6 @@ class _Home extends State<Home> {
     return TimeOfDay(hour: hours, minute: minutes);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -52,38 +53,40 @@ class _Home extends State<Home> {
         itemCount: todosList.length,
         padding: EdgeInsets.all(20),
         itemBuilder:(context,index){
-          return Dismissible(
-              key:ValueKey<String>(todosList[index].id.toString()),
-              onDismissed: (DismissDirection direction) {
-                setState(() {
-                  //DATA_TODOS.removeAt(index);
-                });
-              },
-              background: Container(
-                // color: Colors.green,
-                alignment: AlignmentDirectional.centerEnd,
-                child: const Padding(
-                  padding: EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-                  child: Icon(
-                    Icons.delete,
-                    color: Colors.purple,
-                    size: 40,
+            return Dismissible(
+                key: ValueKey<String>(todosList[index].id.toString()),
+                direction: DismissDirection.endToStart,
+                onDismissed: (DismissDirection direction) {
+                  setState(() {
+                    //DATA_TODOS.removeAt(index);
+                  });
+                },
+                background: Container(
+                  // color: Colors.green,
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: const Padding(
+                    padding: EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.purple,
+                      size: 40,
+                    ),
                   ),
+                  // padding: EdgeInsets.all(20),
                 ),
-                // padding: EdgeInsets.all(20),
-              ),
-              child :Compled(
-                title:todosList[index].title,
-                exDate:DateTime.parse(todosList[index].exDate ) ,
-                discription:todosList[index].discription,
-                startTime:parseTimeOfDayFromString(todosList[index].startTime),
-                endTime:parseTimeOfDayFromString(todosList[index].endTime),
-                color:Color(todosList[index].color),
+                child: Compled(
+                  title: todosList[index].title,
+                  exDate: DateTime.parse(todosList[index].exDate),
+                  discription: todosList[index].discription,
+                  startTime: parseTimeOfDayFromString(todosList[index].startTime),
+                  endTime: parseTimeOfDayFromString(todosList[index].endTime),
+                  color: Color(todosList[index].color),
 
-              )
+                )
 
-          );
+            );
 
         });
+
   }
 }

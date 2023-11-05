@@ -2,6 +2,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:project_todo/TodoDitales.dart';
 import './Finished.dart';
 import './home.dart';
 import './new.dart';
@@ -133,6 +134,7 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         '/homePage': (context) =>const Home(),
+
       },
     );
   }
